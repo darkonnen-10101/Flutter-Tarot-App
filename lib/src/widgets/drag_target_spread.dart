@@ -9,11 +9,27 @@ class DragTargetSpread extends StatefulWidget {
 }
 
 class _DragTargetSpreadState extends State<DragTargetSpread> {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => _AuxModel(),
+      child: DragTargetInstance(),
+    );
+  }
+}
+
+class DragTargetInstance extends StatefulWidget {
+  @override
+  _DragTargetInstanceState createState() => _DragTargetInstanceState();
+}
+
+class _DragTargetInstanceState extends State<DragTargetInstance> {
   bool accepted = false;
 
   @override
   Widget build(BuildContext context) {
     final currentIndex = Provider.of<CurrentIndexProvider>(context);
+    final goToPage = Provider.of<_AuxModel>(context);
 
     return Container(
       height: 150.0,
@@ -22,13 +38,13 @@ class _DragTargetSpreadState extends State<DragTargetSpread> {
           ? DragTarget<int>(
               onWillAccept: (data) {
 //                    Navigator.pushNamed(context, '/detail');
-                print(data);
-
+//                print(data);
+                //print(currentIndex.currentIndex);
                 return true;
               },
               onAccept: (data) {
+                goToPage.goToPage = currentIndex.currentIndex;
                 accepted = true;
-                print(data);
               },
               builder: (context, accepted, rejected) {
                 return Container(
@@ -60,7 +76,7 @@ class _DragTargetSpreadState extends State<DragTargetSpread> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => SingleCardDetailPage(
-                      index: currentIndex.currentIndex,
+                      index: goToPage.goToPage,
                     ),
                   ),
                 );
@@ -86,5 +102,16 @@ class _DragTargetSpreadState extends State<DragTargetSpread> {
               ),
             ),
     );
+  }
+}
+
+class _AuxModel with ChangeNotifier {
+  int _goToPage = 0;
+
+  int get goToPage => _goToPage;
+
+  set goToPage(int value) {
+    _goToPage = value;
+    notifyListeners();
   }
 }

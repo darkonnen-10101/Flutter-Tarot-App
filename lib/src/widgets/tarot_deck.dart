@@ -35,10 +35,17 @@ class _TarotDeckState extends State<TarotDeck> {
     });
   }
 
+  int randomChoice = 0;
+
+  int getRand() {
+    randomChoice = (allCards..shuffle()).first;
+    return randomChoice;
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentIndex = Provider.of<CurrentIndexProvider>(context);
-    int myData = currentIndex.currentIndex;
+    int myData = 0;
 
     return Container(
       height: 150,
@@ -56,12 +63,16 @@ class _TarotDeckState extends State<TarotDeck> {
               //axis: Axis.vertical,
               affinity: Axis.vertical,
               onDragStarted: () {
-                int randomNumber = (allCards..shuffle()).first;
+                currentIndex.currentIndex = getRand();
+//                myData = currentIndex.currentIndex;
+//                print(currentIndex.currentIndex);
 
-                currentIndex.currentIndex = randomNumber;
-
-                myData = randomNumber;
-                print(myData);
+//                int randomNumber = (allCards..shuffle()).first;
+//
+//                currentIndex.currentIndex = randomNumber;
+//
+//                myData = randomNumber;
+//                print(myData);
                 //allCards.remove(randomNumber);
               },
               onDraggableCanceled: (vel, off) {
@@ -69,12 +80,16 @@ class _TarotDeckState extends State<TarotDeck> {
               },
               onDragCompleted: () {
                 setState(() {
-                  int randomNumber = (allCards..shuffle()).first;
+//                  currentIndex.currentIndex = getRand();
+                  myData = randomChoice;
+                  allCards.remove(randomChoice);
 
-                  currentIndex.currentIndex = randomNumber;
-
-                  myData = randomNumber;
-                  allCards.remove(randomNumber);
+//                  int randomNumber = (allCards..shuffle()).first;
+//
+//                  currentIndex.currentIndex = randomNumber;
+//
+//                  myData = randomNumber;
+//                  allCards.remove(randomNumber);
                 });
               },
               data: myData,
