@@ -1,9 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tarotcardapp/src/data/tarot_cards.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:tarotcardapp/src/widgets/tarot_deck.dart';
+import 'package:tarotcardapp/src/pages/spreads/planetary_spread_page.dart';
 import 'single_card_detail_page.dart';
 import 'single_tarot_spread_page.dart';
 
@@ -12,8 +10,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
-          'HomePage',
+          'Tarot',
         ),
       ),
       body: Container(
@@ -71,6 +70,13 @@ class SpreadSwiper extends StatelessWidget {
         layout: SwiperLayout.STACK,
         onTap: (index) {
           print(index);
+          if (index == 0) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => PlanetarySpreadPage(),
+              ),
+            );
+          }
         },
         onIndexChanged: (index) {
           print(index);
