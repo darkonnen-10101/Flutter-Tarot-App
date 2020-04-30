@@ -1,3 +1,20 @@
 {
-  "titlePlanetary": "Tirada Planetaria"
+  "titlePlanetary": "Tirada Planetaria",
+  "titleTetraktys": "Tirada Tetraktys",
+  "titleCrossAndTriangle" : "Tirada Cruz y Triángulo",
+  "titleCelticCrossSpread" : "Tirada Cruz Celta ",
+  "titleAstrologicalSpread" : "Tirada Astrológica",
+  "titleRelationshipSpread" : "Tirada de Relaciones",
+  "titlePlanetarySpread" : "Tirada Planetaria",
+  "titleBirthdaySpread" : "Tirada de Cumpleaños",
+  "titleMandalaSpread" :"Tirada Mandala" ,
+  "titleStarGuideSpread" : "Tirada de Estrella Guía",
+  "titleTreeOfLifeSpread" : "Tirada del Árbol de la Vida",
+  "titlePastLifeSpread" : "Tirada de Vida Pasada",
+  "titleDreamExplorationSpread" : "Tirada de Exploración de Sueños",
+  "titleTrueLoveSpread" : "Tirada del Amor Verdadero",
+  "titleThreeCardsSpread" : "Tirada de Tres Cartas",
+  "textWithPlaceHolder": "Card {cardName}"
+
+
 }

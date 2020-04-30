@@ -36,6 +36,132 @@ class S {
     );
   }
 
+  String get titleTetraktys {
+    return Intl.message(
+      'Tetraktys Spread',
+      name: 'titleTetraktys',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleCrossAndTriangle {
+    return Intl.message(
+      'Cross and Triangle Spread',
+      name: 'titleCrossAndTriangle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleCelticCrossSpread {
+    return Intl.message(
+      'Celtic Cross Spread',
+      name: 'titleCelticCrossSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleAstrologicalSpread {
+    return Intl.message(
+      'Astrological Spread',
+      name: 'titleAstrologicalSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleRelationshipSpread {
+    return Intl.message(
+      'Relationship Spread',
+      name: 'titleRelationshipSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titlePlanetarySpread {
+    return Intl.message(
+      'Planetary Spread',
+      name: 'titlePlanetarySpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleBirthdaySpread {
+    return Intl.message(
+      'Birthday Spread',
+      name: 'titleBirthdaySpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleMandalaSpread {
+    return Intl.message(
+      'Mandala Spread',
+      name: 'titleMandalaSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleStarGuideSpread {
+    return Intl.message(
+      'Star Guide Spread',
+      name: 'titleStarGuideSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleTreeOfLifeSpread {
+    return Intl.message(
+      'Tree of Life Spread',
+      name: 'titleTreeOfLifeSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titlePastLifeSpread {
+    return Intl.message(
+      'Past Life Spread',
+      name: 'titlePastLifeSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleDreamExplorationSpread {
+    return Intl.message(
+      'Dream Exploration Spread',
+      name: 'titleDreamExplorationSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleTrueLoveSpread {
+    return Intl.message(
+      'True Love Spread',
+      name: 'titleTrueLoveSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleThreeCardsSpread {
+    return Intl.message(
+      'Three Cards Spread',
+      name: 'titleThreeCardsSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
   String textWithPlaceHolder(Object cardName) {
     return Intl.message(
       'Card $cardName',

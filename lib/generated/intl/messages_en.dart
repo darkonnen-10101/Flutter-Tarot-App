@@ -24,6 +24,20 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "textWithPlaceHolder" : m0,
-    "titlePlanetary" : MessageLookupByLibrary.simpleMessage("Planetary Spread")
+    "titleAstrologicalSpread" : MessageLookupByLibrary.simpleMessage("Astrological Spread"),
+    "titleBirthdaySpread" : MessageLookupByLibrary.simpleMessage("Birthday Spread"),
+    "titleCelticCrossSpread" : MessageLookupByLibrary.simpleMessage("Celtic Cross Spread"),
+    "titleCrossAndTriangle" : MessageLookupByLibrary.simpleMessage("Cross and Triangle Spread"),
+    "titleDreamExplorationSpread" : MessageLookupByLibrary.simpleMessage("Dream Exploration Spread"),
+    "titleMandalaSpread" : MessageLookupByLibrary.simpleMessage("Mandala Spread"),
+    "titlePastLifeSpread" : MessageLookupByLibrary.simpleMessage("Past Life Spread"),
+    "titlePlanetary" : MessageLookupByLibrary.simpleMessage("Planetary Spread"),
+    "titlePlanetarySpread" : MessageLookupByLibrary.simpleMessage("Planetary Spread"),
+    "titleRelationshipSpread" : MessageLookupByLibrary.simpleMessage("Relationship Spread"),
+    "titleStarGuideSpread" : MessageLookupByLibrary.simpleMessage("Star Guide Spread"),
+    "titleTetraktys" : MessageLookupByLibrary.simpleMessage("Tetraktys Spread"),
+    "titleThreeCardsSpread" : MessageLookupByLibrary.simpleMessage("Three Cards Spread"),
+    "titleTreeOfLifeSpread" : MessageLookupByLibrary.simpleMessage("Tree of Life Spread"),
+    "titleTrueLoveSpread" : MessageLookupByLibrary.simpleMessage("True Love Spread")
   };
 }

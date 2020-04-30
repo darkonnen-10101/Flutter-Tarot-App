@@ -1,4 +1,18 @@
 {
   "titlePlanetary": "Planetary Spread",
+  "titleTetraktys": "Tetraktys Spread",
+  "titleCrossAndTriangle" : "Cross and Triangle Spread",
+  "titleCelticCrossSpread" : "Celtic Cross Spread",
+  "titleAstrologicalSpread" : "Astrological Spread",
+  "titleRelationshipSpread" : "Relationship Spread",
+  "titlePlanetarySpread" : "Planetary Spread",
+  "titleBirthdaySpread" : "Birthday Spread",
+  "titleMandalaSpread" :"Mandala Spread" ,
+  "titleStarGuideSpread" : "Star Guide Spread",
+  "titleTreeOfLifeSpread" : "Tree of Life Spread",
+  "titlePastLifeSpread" : "Past Life Spread",
+  "titleDreamExplorationSpread" : "Dream Exploration Spread",
+  "titleTrueLoveSpread" : "True Love Spread",
+  "titleThreeCardsSpread" : "Three Cards Spread",
   "textWithPlaceHolder": "Card {cardName}"
 }
