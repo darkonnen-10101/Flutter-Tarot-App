@@ -1,5 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tarotcardapp/src/pages/single_card_detail_page.dart';
 import 'package:tarotcardapp/src/providers/current_index.dart';
@@ -44,8 +45,8 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
     final goToPage = Provider.of<_AuxModel>(context);
 
     return Container(
-      height: 150.0,
-      width: 95.0,
+      height: 130.0,
+      width: 70.0,
       child: !accepted
           ? DragTarget<int>(
               onWillAccept: (data) {
@@ -66,11 +67,11 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                 accepted = true;
               },
               builder: (context, accepted, rejected) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image(
+                return Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      child: Image(
                         fit: BoxFit.cover,
                         color: Colors.grey,
                         colorBlendMode: BlendMode.hardLight,
@@ -79,18 +80,18 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                           'assets/images/tarotback.png',
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          '${widget.numberOrder}',
-                          style: TextStyle(
-                            color: Colors.pinkAccent,
-                            fontSize: 40.0,
-                          ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${widget.numberOrder}',
+                        style: GoogleFonts.galada(
+                          color: Colors.pink,
+                          fontSize: 40.0,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
             )
@@ -111,27 +112,38 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                 key: cardKey,
                 front: Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFF9c0c74),
                     boxShadow: [
                       BoxShadow(blurRadius: 3, color: Color(0x44000000))
                     ],
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    child: Image(
-                      fit: BoxFit.cover,
-                      width: 200.0,
-                      image: AssetImage(
-                        //'assets/images/back.jpeg',
-                        'assets/images/tarotback.png',
+                  child: Stack(
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        child: Image(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            //'assets/images/back.jpeg',
+                            'assets/images/tarotback.png',
+                          ),
+                        ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${widget.numberOrder}',
+                          style: GoogleFonts.galada(
+                            color: Colors.pink,
+                            fontSize: 40.0,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 back: Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFF9c0c74),
                     boxShadow: [
                       BoxShadow(blurRadius: 7, color: Color(0x44000000))
                     ],
@@ -139,13 +151,27 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
-                    child: Image(
-                      fit: BoxFit.fill,
-                      width: 200.0,
-                      image: AssetImage(
-                        //'assets/images/back.jpeg',
-                        'assets/images/${goToPage.goToPage}.jpg',
-                      ),
+                    child: Stack(
+                      children: <Widget>[
+                        Image(
+                          fit: BoxFit.fill,
+                          width: 200.0,
+                          image: AssetImage(
+                            //'assets/images/back.jpeg',
+                            'assets/images/${goToPage.goToPage}.jpg',
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${widget.numberOrder}',
+                            style: GoogleFonts.galada(
+                              color: Colors.pink,
+                              fontSize: 40.0,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

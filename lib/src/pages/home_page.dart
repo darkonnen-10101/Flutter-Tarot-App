@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tarotcardapp/generated/l10n.dart';
 import 'package:tarotcardapp/src/data/tarot_cards.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:tarotcardapp/src/pages/spreads/planetary_spread_page.dart';
+import 'package:tarotcardapp/src/routes/spread_routes.dart';
 import 'single_card_detail_page.dart';
 import 'single_tarot_spread_page.dart';
 
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pinkAccent,
         centerTitle: true,
         title: Text(
           'Tarot',
@@ -84,37 +86,76 @@ class SpreadSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> pagesTitles = [
+      S.of(context).titleAstrologicalSpread,
+      S.of(context).titleBirthdaySpread,
+      S.of(context).titleCelticCrossSpread,
+      S.of(context).titleCrossAndTriangle,
+      S.of(context).titleDreamExplorationSpread,
+      S.of(context).titleMandalaSpread,
+      S.of(context).titlePastLifeSpread,
+      S.of(context).titlePlanetarySpread,
+      S.of(context).titleRelationshipSpread,
+      S.of(context).titleStarGuideSpread,
+      S.of(context).titleTetraktys,
+      S.of(context).titleThreeCardsSpread,
+      S.of(context).titleTreeOfLifeSpread,
+      S.of(context).titleTrueLoveSpread,
+    ];
+
     return Container(
       width: double.infinity,
       height: 400.0,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return new Image.network(
-            "http://via.placeholder.com/288x188",
-            fit: BoxFit.fill,
+          return Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  25.0,
+                ),
+                child: Image(
+                  fit: BoxFit.cover,
+                  color: Colors.pinkAccent,
+                  colorBlendMode: BlendMode.darken,
+                  image: AssetImage(
+                    'assets/spreads/spread$index.jpg',
+                  ),
+                ),
+              ),
+              Center(
+                child: Text(
+                  '${pagesTitles[index]}',
+                  style: GoogleFonts.galada(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ],
           );
         },
         pagination: new SwiperPagination(
           builder: DotSwiperPaginationBuilder(
             activeColor: Colors.pinkAccent,
+            color: Colors.blueGrey.withOpacity(
+              0.3,
+            ),
           ),
         ),
-        itemCount: 10,
+        itemCount: 14,
         itemWidth: 300.0,
+        itemHeight: 300.0,
         layout: SwiperLayout.STACK,
         onTap: (index) {
-          print(index);
-          if (index == 0) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => PlanetarySpreadPage(),
-              ),
-            );
-          }
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => pages[index],
+            ),
+          );
         },
-        onIndexChanged: (index) {
-          print(index);
-        },
+        onIndexChanged: (index) {},
       ),
     );
   }
@@ -134,7 +175,7 @@ class __TarotCardsDescriptionState extends State<_TarotCardsDescription> {
   void initState() {
     currentIndex = 0;
     pageController = PageController(
-      initialPage: 3,
+      initialPage: 0,
       viewportFraction: 0.3,
     );
 
@@ -156,9 +197,8 @@ class __TarotCardsDescriptionState extends State<_TarotCardsDescription> {
         minHeight: 250.0,
       ),
       child: PageView.builder(
-        physics: BouncingScrollPhysics(),
         controller: pageController,
-        pageSnapping: false,
+        pageSnapping: true,
         onPageChanged: (int) {
           setState(() {
             currentIndex = int;
@@ -202,10 +242,15 @@ class __TarotCardsDescriptionState extends State<_TarotCardsDescription> {
                     borderRadius: BorderRadius.circular(
                       10.0,
                     ),
-                    child: Image(
-                      image: int == currentIndex
-                          ? AssetImage('assets/images/$int.jpg')
-                          : AssetImage('assets/images/tarotback.png'),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: 230.0,
+                      ),
+                      child: Image(
+                        image: int == currentIndex
+                            ? AssetImage('assets/images/$int.jpg')
+                            : AssetImage('assets/images/tarotback.png'),
+                      ),
                     ),
                   ),
                 ),
@@ -265,7 +310,7 @@ class _SingleCardChoice extends StatelessWidget {
             Hero(
               tag: 'tarot_spread',
               child: Opacity(
-                opacity: 0.3,
+                opacity: 0.9,
                 child: Container(
                   height: 300.0,
                   width: 300.0,
@@ -288,11 +333,11 @@ class _SingleCardChoice extends StatelessWidget {
                     ),
                     child: Image(
                       fit: BoxFit.cover,
-                      color: Colors.grey,
-                      colorBlendMode: BlendMode.colorDodge,
+                      color: Colors.pink,
+                      colorBlendMode: BlendMode.darken,
                       height: 100.0,
-                      image: NetworkImage(
-                        'https://www.avcj.com/IMG/641/23641/gypsy-fortune-teller-crystal-ball-prediction-580x358.jpeg?1576576090',
+                      image: AssetImage(
+                        'assets/images/oracle.jpg',
                       ),
                     ),
                   ),
@@ -300,10 +345,10 @@ class _SingleCardChoice extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 150.0,
+              top: 120.0,
               left: 30.0,
               child: Text(
-                'Daily Reading',
+                S.of(context).dailyReading,
                 style: GoogleFonts.galada(
                   fontSize: 40.0,
                   color: Colors.white,

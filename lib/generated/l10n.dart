@@ -27,10 +27,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  String get titlePlanetary {
+  String get dailyReading {
     return Intl.message(
-      'Planetary Spread',
-      name: 'titlePlanetary',
+      'Daily Reading',
+      name: 'dailyReading',
       desc: '',
       args: [],
     );
@@ -168,6 +168,132 @@ class S {
       name: 'textWithPlaceHolder',
       desc: '',
       args: [cardName],
+    );
+  }
+
+  String get spreadTetraktys {
+    return Intl.message(
+      '',
+      name: 'spreadTetraktys',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadCrossAndTriangle {
+    return Intl.message(
+      '',
+      name: 'spreadCrossAndTriangle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadCelticCross {
+    return Intl.message(
+      '',
+      name: 'spreadCelticCross',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadAstrological {
+    return Intl.message(
+      '',
+      name: 'spreadAstrological',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadRelationship {
+    return Intl.message(
+      '',
+      name: 'spreadRelationship',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadPlanetary {
+    return Intl.message(
+      '',
+      name: 'spreadPlanetary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadBirthday {
+    return Intl.message(
+      '',
+      name: 'spreadBirthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadMandala {
+    return Intl.message(
+      '',
+      name: 'spreadMandala',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadStarGuide {
+    return Intl.message(
+      '',
+      name: 'spreadStarGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadTreeOfLife {
+    return Intl.message(
+      '',
+      name: 'spreadTreeOfLife',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadPastLife {
+    return Intl.message(
+      '',
+      name: 'spreadPastLife',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadDreamExploration {
+    return Intl.message(
+      '',
+      name: 'spreadDreamExploration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadTrueLove {
+    return Intl.message(
+      '',
+      name: 'spreadTrueLove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get spreadThreeCards {
+    return Intl.message(
+      '',
+      name: 'spreadThreeCards',
+      desc: '',
+      args: [],
     );
   }
 }

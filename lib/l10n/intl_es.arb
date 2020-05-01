@@ -1,5 +1,7 @@
 {
-  "titlePlanetary": "Tirada Planetaria",
+
+  "dailyReading" : "Lectura Diaria",
+
   "titleTetraktys": "Tirada Tetraktys",
   "titleCrossAndTriangle" : "Tirada Cruz y Triángulo",
   "titleCelticCrossSpread" : "Tirada Cruz Celta ",
@@ -14,6 +16,22 @@
   "titleDreamExplorationSpread" : "Tirada de Exploración de Sueños",
   "titleTrueLoveSpread" : "Tirada del Amor Verdadero",
   "titleThreeCardsSpread" : "Tirada de Tres Cartas",
+
+  "spreadTetraktys": "",
+  "spreadCrossAndTriangle" : "",
+  "spreadCelticCross" : "",
+  "spreadAstrological" : "",
+  "spreadRelationship" : "",
+  "spreadPlanetary": "Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea Esta es la información de la tirada \nesto es un salto de línea",
+  "spreadBirthday" : "",
+  "spreadMandala" :"" ,
+  "spreadStarGuide" : "",
+  "spreadTreeOfLife" : "",
+  "spreadPastLife" : "",
+  "spreadDreamExploration" : "",
+  "spreadTrueLove" : "",
+  "spreadThreeCards" : "",
+
   "textWithPlaceHolder": "Card {cardName}"
 
 

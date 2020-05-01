@@ -1,10 +1,15 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
 import 'package:tarotcardapp/src/widgets/drag_target_spread.dart';
 import 'package:tarotcardapp/src/widgets/tarot_deck.dart';
 
 class TetraktysSpreadPage extends StatefulWidget {
+  final int index;
+
+  TetraktysSpreadPage(this.index);
+
   @override
   _TetraktysSpreadPageState createState() => _TetraktysSpreadPageState();
 }
@@ -13,14 +18,24 @@ class _TetraktysSpreadPageState extends State<TetraktysSpreadPage> {
   bool accepted = false;
   GlobalKey<FlipCardState> spreadKey = GlobalKey<FlipCardState>();
 
+  final _controller = new ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pinkAccent,
         centerTitle: true,
         actions: <Widget>[
           FloatingActionButton(
             elevation: 0.0,
+            backgroundColor: Colors.pinkAccent,
             onPressed: () {
               spreadKey.currentState.toggleCard();
             },
@@ -31,74 +46,151 @@ class _TetraktysSpreadPageState extends State<TetraktysSpreadPage> {
         ],
         title: Text(
           S.of(context).titleTetraktys,
+          style: GoogleFonts.galada(),
         ),
       ),
-      body: FlipCard(
-        direction: FlipDirection.HORIZONTAL,
-        flipOnTouch: false,
-        key: spreadKey,
-        front: Container(
-          width: double.infinity,
-          height: double.infinity,
-          child: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+//          Container(
+//            height: MediaQuery.of(context).size.height,
+//            decoration: BoxDecoration(
+//              gradient: LinearGradient(
+//                colors: [Colors.pinkAccent, Colors.purple],
+//              ),
+//            ),
+//          ),
+          Image(
+            fit: BoxFit.cover,
+            color: Colors.pinkAccent,
+            colorBlendMode: BlendMode.color,
+            image: AssetImage(
+              'assets/spreads/spread${widget.index}.jpg',
+            ),
+          ),
+          Container(
+            height: double.infinity,
+            child: FlipCard(
+              direction: FlipDirection.HORIZONTAL,
+              flipOnTouch: false,
+              key: spreadKey,
+              front: Container(
+                width: double.infinity,
+                height: double.infinity,
+                child: Stack(
+                  children: <Widget>[
+                    SingleChildScrollView(
+                      controller: _controller,
+                      physics: BouncingScrollPhysics(),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          DragTargetSpread(
+                            numberOrder: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              DragTargetSpread(
+                                numberOrder: 3,
+                              ),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      DragTargetSpread(
+                                        numberOrder: 4,
+                                      ),
+                                      SizedBox(
+                                        width: 30.0,
+                                      ),
+                                      DragTargetSpread(
+                                        numberOrder: 6,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      DragTargetSpread(
+                                        numberOrder: 2,
+                                      ),
+                                      SizedBox(
+                                        width: 30.0,
+                                      ),
+                                      DragTargetSpread(
+                                        numberOrder: 8,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 7,
+                              ),
+                            ],
+                          ),
+                          DragTargetSpread(
+                            numberOrder: 1,
+                          ),
+                          SizedBox(
+                            height: 200.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: TarotDeck(),
+                    ),
+                  ],
+                ),
+              ),
+              back: Padding(
+                padding: EdgeInsets.all(
+                  20.0,
+                ),
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(
-                    top: 10.0,
-                    bottom: 180.0,
-                    left: 10.0,
-                    right: 10.0,
+                  width: double.infinity,
+                  height: double.infinity,
+                  padding: EdgeInsets.all(
+                    30.0,
                   ),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: <Widget>[
-                      Positioned(
-                        left: 0,
-                        child: DragTargetSpread(
-                          numberOrder: 0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      colorFilter:
+                          ColorFilter.mode(Colors.pink, BlendMode.darken),
+                      image: AssetImage('assets/images/tarotback.png'),
+                    ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.0,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Text(
+                        S.of(context).spreadTetraktys,
+                        style: GoogleFonts.galada(
+                          color: Colors.white,
+                          fontSize: 20.0,
                         ),
                       ),
-                      Positioned(
-                        right: 0,
-                        child: DragTargetSpread(
-                          numberOrder: 1,
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        left: 50,
-                        child: DragTargetSpread(
-                          numberOrder: 2,
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: DragTargetSpread(
-                          numberOrder: 3,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                child: TarotDeck(),
-              ),
-            ],
+            ),
           ),
-        ),
-        back: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.green,
-          child: Image(
-            image: AssetImage('assets/images/tarotback.png'),
-          ),
-        ),
+        ],
       ),
     );
   }

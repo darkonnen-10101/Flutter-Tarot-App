@@ -1,5 +1,7 @@
 {
-  "titlePlanetary": "Planetary Spread",
+
+  "dailyReading" : "Daily Reading",
+
   "titleTetraktys": "Tetraktys Spread",
   "titleCrossAndTriangle" : "Cross and Triangle Spread",
   "titleCelticCrossSpread" : "Celtic Cross Spread",
@@ -14,5 +16,20 @@
   "titleDreamExplorationSpread" : "Dream Exploration Spread",
   "titleTrueLoveSpread" : "True Love Spread",
   "titleThreeCardsSpread" : "Three Cards Spread",
-  "textWithPlaceHolder": "Card {cardName}"
+  "textWithPlaceHolder": "Card {cardName}",
+
+  "spreadTetraktys": "",
+  "spreadCrossAndTriangle" : "",
+  "spreadCelticCross" : "",
+  "spreadAstrological" : "",
+  "spreadRelationship" : "",
+  "spreadPlanetary" : "",
+  "spreadBirthday" : "",
+  "spreadMandala" :"" ,
+  "spreadStarGuide" : "",
+  "spreadTreeOfLife" : "",
+  "spreadPastLife" : "",
+  "spreadDreamExploration" : "",
+  "spreadTrueLove" : "",
+  "spreadThreeCards" : ""
 }
