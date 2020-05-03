@@ -94,22 +94,25 @@ class _TarotDeckState extends State<TarotDeck> {
               },
               data: myData,
               childWhenDragging: Container(),
-              feedback: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(blurRadius: 3, color: Color(0x44000000))
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Image(
-                    width: 150.0,
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      //'assets/images/back.jpeg',
-                      'assets/images/tarotback.png',
+              feedback: RotatedBox(
+                quarterTurns: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(blurRadius: 3, color: Color(0x44000000))
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    child: Image(
+                      width: 150.0,
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        //'assets/images/back.jpeg',
+                        'assets/images/tarotback.png',
+                      ),
                     ),
                   ),
                 ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +10,7 @@ import 'package:tarotcardapp/src/providers/current_index.dart';
 class DragTargetSpread extends StatefulWidget {
   final int numberOrder;
 
-  DragTargetSpread({@required this.numberOrder});
+  DragTargetSpread({this.numberOrder});
 
   @override
   _DragTargetSpreadState createState() => _DragTargetSpreadState();
@@ -38,6 +40,7 @@ class DragTargetInstance extends StatefulWidget {
 class _DragTargetInstanceState extends State<DragTargetInstance> {
   bool accepted = false;
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  final _random = Random().nextInt(22);
 
   @override
   Widget build(BuildContext context) {
@@ -69,22 +72,27 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
               builder: (context, accepted, rejected) {
                 return Stack(
                   children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      child: Image(
-                        fit: BoxFit.cover,
-                        color: Colors.grey,
-                        colorBlendMode: BlendMode.hardLight,
-                        image: AssetImage(
-                          //'assets/images/back.jpeg',
-                          'assets/images/tarotback.png',
+                    RotatedBox(
+                      quarterTurns: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        child: Image(
+                          fit: BoxFit.cover,
+                          color: Colors.grey,
+                          colorBlendMode: BlendMode.hardLight,
+                          image: AssetImage(
+                            //'assets/images/back.jpeg',
+                            'assets/images/tarotback.png',
+                          ),
                         ),
                       ),
                     ),
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        '${widget.numberOrder}',
+                        widget.numberOrder == null
+                            ? ''
+                            : '${widget.numberOrder}',
                         style: GoogleFonts.galada(
                           color: Colors.pink,
                           fontSize: 40.0,
@@ -119,20 +127,25 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                   ),
                   child: Stack(
                     children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        child: Image(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            //'assets/images/back.jpeg',
-                            'assets/images/tarotback.png',
+                      RotatedBox(
+                        quarterTurns: 2,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: AssetImage(
+                              //'assets/images/back.jpeg',
+                              'assets/images/tarotback.png',
+                            ),
                           ),
                         ),
                       ),
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          '${widget.numberOrder}',
+                          widget.numberOrder == null
+                              ? ''
+                              : '${widget.numberOrder}',
                           style: GoogleFonts.galada(
                             color: Colors.pink,
                             fontSize: 40.0,
@@ -153,18 +166,23 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     child: Stack(
                       children: <Widget>[
-                        Image(
-                          fit: BoxFit.fill,
-                          width: 200.0,
-                          image: AssetImage(
-                            //'assets/images/back.jpeg',
-                            'assets/images/${goToPage.goToPage}.jpg',
+                        RotatedBox(
+                          quarterTurns: _random % 2 == 0 ? 2 : 4,
+                          child: Image(
+                            fit: BoxFit.fill,
+                            width: 200.0,
+                            image: AssetImage(
+                              //'assets/images/back.jpeg',
+                              'assets/images/${goToPage.goToPage}.jpg',
+                            ),
                           ),
                         ),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
-                            '${widget.numberOrder}',
+                            widget.numberOrder == null
+                                ? ''
+                                : '${widget.numberOrder}',
                             style: GoogleFonts.galada(
                               color: Colors.pink,
                               fontSize: 40.0,

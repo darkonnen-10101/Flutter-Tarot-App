@@ -246,10 +246,13 @@ class __TarotCardsDescriptionState extends State<_TarotCardsDescription> {
                       constraints: BoxConstraints(
                         maxHeight: 230.0,
                       ),
-                      child: Image(
-                        image: int == currentIndex
-                            ? AssetImage('assets/images/$int.jpg')
-                            : AssetImage('assets/images/tarotback.png'),
+                      child: RotatedBox(
+                        quarterTurns: int == currentIndex ? 0 : 2,
+                        child: Image(
+                          image: int == currentIndex
+                              ? AssetImage('assets/images/$int.jpg')
+                              : AssetImage('assets/images/tarotback.png'),
+                        ),
                       ),
                     ),
                   ),

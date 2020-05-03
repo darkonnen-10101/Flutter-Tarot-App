@@ -2,6 +2,8 @@ import 'package:deck_scrollview/deck_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
+import 'package:tarotcardapp/src/widgets/drag_target_spread.dart';
+import 'package:tarotcardapp/src/widgets/tarot_deck.dart';
 import 'single_card_detail_page.dart';
 import 'dart:math';
 
@@ -11,7 +13,7 @@ class SingleTarotSpreadPage extends StatefulWidget {
 }
 
 class _SingleTarotSpreadPageState extends State<SingleTarotSpreadPage> {
-  ScrollController controller;
+//  ScrollController controller;
 
   int currentIndex = 0;
 
@@ -22,25 +24,25 @@ class _SingleTarotSpreadPageState extends State<SingleTarotSpreadPage> {
   void initState() {
     super.initState();
 
-    controller = ScrollController(
-      initialScrollOffset: 10.0,
-      keepScrollOffset: true,
-    ); // NEW
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller
-        ..animateTo(
-          // NEW
-          controller.position.maxScrollExtent, // NEW
-          duration: const Duration(milliseconds: 500), // NEW
-          curve: Curves.easeInOutCubic, // NEW
-        );
-    });
+//    controller = ScrollController(
+//      initialScrollOffset: 10.0,
+//      keepScrollOffset: true,
+//    ); // NEW
+//
+//    WidgetsBinding.instance.addPostFrameCallback((_) {
+//      controller
+//        ..animateTo(
+//          // NEW
+//          controller.position.maxScrollExtent, // NEW
+//          duration: const Duration(milliseconds: 500), // NEW
+//          curve: Curves.easeInOutCubic, // NEW
+//        );
+//    });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+//    controller.dispose();
     super.dispose();
   }
 
@@ -81,137 +83,13 @@ class _SingleTarotSpreadPageState extends State<SingleTarotSpreadPage> {
                 child: Container(
                   height: 150.0,
                   width: 95.0,
-                  child: DragTarget(
-                    onWillAccept: (val) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => SingleCardDetailPage(
-                            index: currentIndex,
-                          ),
-                        ),
-                      );
-//                    Navigator.pushNamed(context, '/detail');
-                      return true;
-                    },
-                    onAccept: (val) {},
-                    builder: (context, accepted, rejected) {
-                      return Hero(
-                        tag: 'single_card_detail',
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xFF9c0c74),
-                            boxShadow: [
-                              BoxShadow(blurRadius: 3, color: Color(0x44000000))
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            child: Image(
-                              fit: BoxFit.cover,
-                              color: Colors.grey,
-                              colorBlendMode: BlendMode.hardLight,
-                              image: AssetImage(
-                                //'assets/images/back.jpeg',
-                                'assets/images/tarotback.png',
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                  child: DragTargetSpread(),
                 ),
               ),
             ),
             Positioned(
               bottom: 0.0,
-              child: Container(
-                height: 150,
-                width: MediaQuery.of(context).size.width,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: DeckScrollView.useDelegate(
-                    layoutPow: 2.5,
-                    itemExtent: 95,
-                    controller: controller,
-                    clipToSize: true,
-                    childDelegate: DeckChildBuilderDelegate(
-                      builder: (context, index) => Draggable(
-                        maxSimultaneousDrags: 1,
-                        //axis: Axis.vertical,
-                        affinity: Axis.vertical,
-                        onDragStarted: () {
-                          setState(() {
-                            myCount -= 1;
-                            currentIndex = Random().nextInt(
-                              22,
-                            );
-                          });
-                        },
-                        onDraggableCanceled: (vel, off) {
-                          setState(() {
-                            myCount = 22;
-                          });
-                        },
-                        onDragCompleted: () {
-                          setState(() {
-                            myCount -= 1;
-                          });
-                        },
-                        childWhenDragging: Container(),
-                        feedback: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(blurRadius: 3, color: Color(0x44000000))
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            child: Image(
-                              width: 150.0,
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                //'assets/images/back.jpeg',
-                                'assets/images/tarotback.png',
-                              ),
-                            ),
-                          ),
-                        ),
-                        child: RotatedBox(
-                          quarterTurns: 1,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xFF9c0c74),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 3, color: Color(0x44000000))
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              child: Image(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  //'assets/images/back.jpeg',
-                                  'assets/images/tarotback.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      childCount: myCount,
-                    ),
-                  ),
-                ),
-              ),
+              child: TarotDeck(),
             ),
           ],
         ),

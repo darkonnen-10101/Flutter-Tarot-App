@@ -162,15 +162,6 @@ class S {
     );
   }
 
-  String textWithPlaceHolder(Object cardName) {
-    return Intl.message(
-      'Card $cardName',
-      name: 'textWithPlaceHolder',
-      desc: '',
-      args: [cardName],
-    );
-  }
-
   String get spreadTetraktys {
     return Intl.message(
       '',
@@ -292,6 +283,204 @@ class S {
     return Intl.message(
       '',
       name: 'spreadThreeCards',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card0 {
+    return Intl.message(
+      'The Fool is an special card',
+      name: 'card0',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card1 {
+    return Intl.message(
+      '',
+      name: 'card1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card2 {
+    return Intl.message(
+      '',
+      name: 'card2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card3 {
+    return Intl.message(
+      '',
+      name: 'card3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card4 {
+    return Intl.message(
+      '',
+      name: 'card4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card5 {
+    return Intl.message(
+      '',
+      name: 'card5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card6 {
+    return Intl.message(
+      '',
+      name: 'card6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card7 {
+    return Intl.message(
+      '',
+      name: 'card7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card8 {
+    return Intl.message(
+      '',
+      name: 'card8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card9 {
+    return Intl.message(
+      '',
+      name: 'card9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card10 {
+    return Intl.message(
+      '',
+      name: 'card10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card11 {
+    return Intl.message(
+      '',
+      name: 'card11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card12 {
+    return Intl.message(
+      '',
+      name: 'card12',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card13 {
+    return Intl.message(
+      '',
+      name: 'card13',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card14 {
+    return Intl.message(
+      '',
+      name: 'card14',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card15 {
+    return Intl.message(
+      '',
+      name: 'card15',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card16 {
+    return Intl.message(
+      '',
+      name: 'card16',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card17 {
+    return Intl.message(
+      '',
+      name: 'card17',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card18 {
+    return Intl.message(
+      '',
+      name: 'card18',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card19 {
+    return Intl.message(
+      '',
+      name: 'card19',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card20 {
+    return Intl.message(
+      '',
+      name: 'card20',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get card21 {
+    return Intl.message(
+      '',
+      name: 'card21',
       desc: '',
       args: [],
     );

@@ -19,10 +19,30 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
-  static m0(cardName) => "Card ${cardName}";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "card0" : MessageLookupByLibrary.simpleMessage(""),
+    "card1" : MessageLookupByLibrary.simpleMessage(""),
+    "card10" : MessageLookupByLibrary.simpleMessage(""),
+    "card11" : MessageLookupByLibrary.simpleMessage(""),
+    "card12" : MessageLookupByLibrary.simpleMessage(""),
+    "card13" : MessageLookupByLibrary.simpleMessage(""),
+    "card14" : MessageLookupByLibrary.simpleMessage(""),
+    "card15" : MessageLookupByLibrary.simpleMessage(""),
+    "card16" : MessageLookupByLibrary.simpleMessage(""),
+    "card17" : MessageLookupByLibrary.simpleMessage(""),
+    "card18" : MessageLookupByLibrary.simpleMessage(""),
+    "card19" : MessageLookupByLibrary.simpleMessage(""),
+    "card2" : MessageLookupByLibrary.simpleMessage(""),
+    "card20" : MessageLookupByLibrary.simpleMessage(""),
+    "card21" : MessageLookupByLibrary.simpleMessage(""),
+    "card3" : MessageLookupByLibrary.simpleMessage(""),
+    "card4" : MessageLookupByLibrary.simpleMessage(""),
+    "card5" : MessageLookupByLibrary.simpleMessage(""),
+    "card6" : MessageLookupByLibrary.simpleMessage(""),
+    "card7" : MessageLookupByLibrary.simpleMessage(""),
+    "card8" : MessageLookupByLibrary.simpleMessage(""),
+    "card9" : MessageLookupByLibrary.simpleMessage(""),
     "dailyReading" : MessageLookupByLibrary.simpleMessage("Lectura Diaria"),
     "spreadAstrological" : MessageLookupByLibrary.simpleMessage(""),
     "spreadBirthday" : MessageLookupByLibrary.simpleMessage(""),
@@ -38,7 +58,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "spreadThreeCards" : MessageLookupByLibrary.simpleMessage(""),
     "spreadTreeOfLife" : MessageLookupByLibrary.simpleMessage(""),
     "spreadTrueLove" : MessageLookupByLibrary.simpleMessage(""),
-    "textWithPlaceHolder" : m0,
     "titleAstrologicalSpread" : MessageLookupByLibrary.simpleMessage("Tirada Astrológica"),
     "titleBirthdaySpread" : MessageLookupByLibrary.simpleMessage("Tirada de Cumpleaños"),
     "titleCelticCrossSpread" : MessageLookupByLibrary.simpleMessage("Tirada Cruz Celta "),
