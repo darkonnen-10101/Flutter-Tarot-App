@@ -6,11 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tarotcardapp/src/pages/single_card_detail_page.dart';
 import 'package:tarotcardapp/src/providers/current_index.dart';
+import 'package:tarotcardapp/src/providers/all_deck.dart';
 
 class DragTargetSpread extends StatefulWidget {
   final int numberOrder;
+  final bool autoDetail;
 
-  DragTargetSpread({this.numberOrder});
+  DragTargetSpread({this.numberOrder, this.autoDetail});
 
   @override
   _DragTargetSpreadState createState() => _DragTargetSpreadState();
@@ -23,6 +25,7 @@ class _DragTargetSpreadState extends State<DragTargetSpread> {
       create: (_) => _AuxModel(),
       child: DragTargetInstance(
         numberOrder: widget.numberOrder,
+        autoDetail: widget.autoDetail,
       ),
     );
   }
@@ -30,17 +33,26 @@ class _DragTargetSpreadState extends State<DragTargetSpread> {
 
 class DragTargetInstance extends StatefulWidget {
   final int numberOrder;
+  final bool autoDetail;
 
-  DragTargetInstance({@required this.numberOrder});
+  DragTargetInstance({@required this.numberOrder, this.autoDetail});
 
   @override
   _DragTargetInstanceState createState() => _DragTargetInstanceState();
 }
 
 class _DragTargetInstanceState extends State<DragTargetInstance> {
-  bool accepted = false;
-  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
-  final _random = Random().nextInt(22);
+  bool _accepted = false;
+  GlobalKey<FlipCardState> _cardKey = GlobalKey<FlipCardState>();
+  final _random = Random().nextInt(21);
+  bool _orientation;
+
+  @override
+  void initState() {
+    _orientation = Provider.of<AllDeck>(context, listen: false).onlyUpright;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,24 +62,50 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
     return Container(
       height: 130.0,
       width: 70.0,
-      child: !accepted
+      child: !_accepted
           ? DragTarget<int>(
               onWillAccept: (data) {
 //                    Navigator.pushNamed(context, '/detail');
 //                print(data);
                 //print(currentIndex.currentIndex);
+
+                if (widget.autoDetail == true) {
+                  goToPage.goToPage = currentIndex.currentIndex;
+                  Future<FlipCardState>.delayed(Duration(milliseconds: 1200),
+                      () {
+                    return _cardKey.currentState;
+                  })
+                    ..then((myVar) {
+                      myVar.toggleCard();
+                    })
+                    ..then((val) {
+                      Future.delayed(Duration(milliseconds: 1200), () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SingleCardDetailPage(
+                              index: goToPage.goToPage,
+                            ),
+                          ),
+                        );
+                      });
+                    });
+
+                  _accepted = true;
+                }
+
                 return true;
               },
               onAccept: (data) {
                 goToPage.goToPage = currentIndex.currentIndex;
                 Future<FlipCardState>.delayed(Duration(milliseconds: 1200), () {
-                  return cardKey.currentState;
+                  return _cardKey.currentState;
                 })
                   ..then((myVar) {
                     myVar.toggleCard();
                   });
 
-                accepted = true;
+                _accepted = true;
               },
               builder: (context, accepted, rejected) {
                 return Stack(
@@ -117,7 +155,7 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
               child: FlipCard(
                 direction: FlipDirection.HORIZONTAL,
                 flipOnTouch: false,
-                key: cardKey,
+                key: _cardKey,
                 front: Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -167,7 +205,8 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                     child: Stack(
                       children: <Widget>[
                         RotatedBox(
-                          quarterTurns: _random % 2 == 0 ? 2 : 4,
+                          quarterTurns:
+                              _orientation ? 4 : _random % 2 == 0 ? 2 : 4,
                           child: Image(
                             fit: BoxFit.fill,
                             width: 200.0,

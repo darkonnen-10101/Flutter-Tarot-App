@@ -1,6 +1,7 @@
 import 'package:deck_scrollview/deck_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tarotcardapp/src/providers/all_deck.dart';
 import 'package:tarotcardapp/src/providers/current_index.dart';
 
 class TarotDeck extends StatefulWidget {
@@ -11,13 +12,18 @@ class TarotDeck extends StatefulWidget {
 class _TarotDeckState extends State<TarotDeck> {
   ScrollController controller;
 
-  int myCount = 22;
   bool myBool = false;
-  final List allCards = List.generate(22, (int) => int);
+
+  int _numOfCards;
+
+  List allCards;
 
   @override
   void initState() {
     super.initState();
+    _numOfCards =
+        Provider.of<AllDeck>(context, listen: false).allDeck ? 78 : 22;
+    allCards = List<int>.generate(_numOfCards, (int) => int);
 
     controller = ScrollController(
       initialScrollOffset: 10.0,
@@ -29,8 +35,8 @@ class _TarotDeckState extends State<TarotDeck> {
         ..animateTo(
           // NEW
           controller.position.maxScrollExtent, // NEW
-          duration: const Duration(milliseconds: 500), // NEW
-          curve: Curves.easeInOutCubic, // NEW
+          duration: const Duration(milliseconds: 1000), // NEW
+          curve: Curves.linear, // NEW
         );
     });
   }

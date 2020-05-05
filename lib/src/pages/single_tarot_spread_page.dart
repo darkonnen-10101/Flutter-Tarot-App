@@ -1,11 +1,8 @@
-import 'package:deck_scrollview/deck_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
 import 'package:tarotcardapp/src/widgets/drag_target_spread.dart';
 import 'package:tarotcardapp/src/widgets/tarot_deck.dart';
-import 'single_card_detail_page.dart';
-import 'dart:math';
 
 class SingleTarotSpreadPage extends StatefulWidget {
   @override
@@ -13,39 +10,6 @@ class SingleTarotSpreadPage extends StatefulWidget {
 }
 
 class _SingleTarotSpreadPageState extends State<SingleTarotSpreadPage> {
-//  ScrollController controller;
-
-  int currentIndex = 0;
-
-  int myCount = 22;
-  bool myBool = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-//    controller = ScrollController(
-//      initialScrollOffset: 10.0,
-//      keepScrollOffset: true,
-//    ); // NEW
-//
-//    WidgetsBinding.instance.addPostFrameCallback((_) {
-//      controller
-//        ..animateTo(
-//          // NEW
-//          controller.position.maxScrollExtent, // NEW
-//          duration: const Duration(milliseconds: 500), // NEW
-//          curve: Curves.easeInOutCubic, // NEW
-//        );
-//    });
-  }
-
-  @override
-  void dispose() {
-//    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -83,7 +47,9 @@ class _SingleTarotSpreadPageState extends State<SingleTarotSpreadPage> {
                 child: Container(
                   height: 150.0,
                   width: 95.0,
-                  child: DragTargetSpread(),
+                  child: DragTargetSpread(
+                    autoDetail: true,
+                  ),
                 ),
               ),
             ),

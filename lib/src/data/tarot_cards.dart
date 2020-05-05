@@ -22,3 +22,4 @@ Map<int, String> cardsNames = {
   20: 'Judgement',
   21: 'The World',
 };
+// TODO REFACTORIZAR CON 88 CARTAS

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:tarotcardapp/src/pages/spreads/astrological_spread_page.dart';
 import 'package:tarotcardapp/src/pages/spreads/birthday_spread_page.dart';
 import 'package:tarotcardapp/src/pages/spreads/celtic_cross_spread_page.dart';

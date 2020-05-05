@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tarotcardapp/src/providers/all_deck.dart';
 
 import 'src/pages/home_page.dart';
 import 'src/providers/current_index.dart';
@@ -22,6 +23,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => CurrentIndexProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AllDeck(),
         ),
       ],
       child: MyApp(),
