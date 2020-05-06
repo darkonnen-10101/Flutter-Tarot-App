@@ -41,23 +41,43 @@ class DragTargetInstance extends StatefulWidget {
   _DragTargetInstanceState createState() => _DragTargetInstanceState();
 }
 
-class _DragTargetInstanceState extends State<DragTargetInstance> {
+class _DragTargetInstanceState extends State<DragTargetInstance>
+    with SingleTickerProviderStateMixin {
   bool _accepted = false;
   GlobalKey<FlipCardState> _cardKey = GlobalKey<FlipCardState>();
   final _random = Random().nextInt(21);
   bool _orientation;
 
+  AnimationController animationController;
+  Animation animation;
+
   @override
   void initState() {
     _orientation = Provider.of<AllDeck>(context, listen: false).onlyUpright;
 
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: 1000,
+      ),
+    );
+
+    animation = Tween(begin: 0.0, end: 1.0).animate(animationController);
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final currentIndex = Provider.of<CurrentIndexProvider>(context);
     final goToPage = Provider.of<_AuxModel>(context);
+    animationController.forward();
 
     return Container(
       height: 130.0,
@@ -65,16 +85,13 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
       child: !_accepted
           ? DragTarget<int>(
               onWillAccept: (data) {
-//                    Navigator.pushNamed(context, '/detail');
-//                print(data);
-                //print(currentIndex.currentIndex);
-
+/*
                 if (widget.autoDetail == true) {
                   goToPage.goToPage = currentIndex.currentIndex;
                   Future<FlipCardState>.delayed(Duration(milliseconds: 1200),
-                      () {
-                    return _cardKey.currentState;
-                  })
+                          () {
+                        return _cardKey.currentState;
+                      })
                     ..then((myVar) {
                       myVar.toggleCard();
                     })
@@ -91,8 +108,8 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                       });
                     });
 
-                  _accepted = true;
                 }
+*/
 
                 return true;
               },
@@ -103,6 +120,20 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                 })
                   ..then((myVar) {
                     myVar.toggleCard();
+                  })
+                  ..then((val) {
+                    if (widget.autoDetail == true) {
+                      Future.delayed(Duration(milliseconds: 1200), () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SingleCardDetailPage(
+                              index: goToPage.goToPage,
+                            ),
+                          ),
+                        );
+                      });
+                    }
                   });
 
                 _accepted = true;
@@ -110,17 +141,20 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
               builder: (context, accepted, rejected) {
                 return Stack(
                   children: <Widget>[
-                    RotatedBox(
-                      quarterTurns: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        child: Image(
-                          fit: BoxFit.cover,
-                          color: Colors.grey,
-                          colorBlendMode: BlendMode.hardLight,
-                          image: AssetImage(
-                            //'assets/images/back.jpeg',
-                            'assets/images/tarotback.png',
+                    FadeTransition(
+                      opacity: animationController,
+                      child: RotatedBox(
+                        quarterTurns: 2,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          child: Image(
+                            fit: BoxFit.cover,
+                            color: Colors.grey,
+                            colorBlendMode: BlendMode.hardLight,
+                            image: AssetImage(
+                              //'assets/images/back.jpeg',
+                              'assets/images/tarotback.png',
+                            ),
                           ),
                         ),
                       ),
@@ -208,8 +242,7 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                           quarterTurns:
                               _orientation ? 4 : _random % 2 == 0 ? 2 : 4,
                           child: Image(
-                            fit: BoxFit.fill,
-                            width: 200.0,
+                            fit: BoxFit.fitHeight,
                             image: AssetImage(
                               //'assets/images/back.jpeg',
                               'assets/images/${goToPage.goToPage}.jpg',
@@ -234,37 +267,6 @@ class _DragTargetInstanceState extends State<DragTargetInstance> {
                 ),
               ),
             ),
-//          : GestureDetector(
-//              onTap: () {
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(
-//                    builder: (_) => SingleCardDetailPage(
-//                      index: goToPage.goToPage,
-//                    ),
-//                  ),
-//                );
-//              },
-//              child: Container(
-//                decoration: BoxDecoration(
-//                  color: Color(0xFF9c0c74),
-//                  boxShadow: [
-//                    BoxShadow(blurRadius: 3, color: Color(0x44000000))
-//                  ],
-//                  borderRadius: BorderRadius.all(Radius.circular(5)),
-//                ),
-//                child: ClipRRect(
-//                  borderRadius: BorderRadius.all(Radius.circular(5)),
-//                  child: Image(
-//                    fit: BoxFit.cover,
-//                    image: AssetImage(
-//                      //'assets/images/back.jpeg',
-//                      'assets/images/tarotback.png',
-//                    ),
-//                  ),
-//                ),
-//              ),
-//            ),
     );
   }
 }

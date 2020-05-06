@@ -32,6 +32,8 @@ class _SingleTarotSpreadPageState extends State<SingleTarotSpreadPage> {
                   child: Hero(
                     tag: 'tarot_spread',
                     child: Image(
+                      color: Colors.pinkAccent,
+                      colorBlendMode: BlendMode.darken,
                       fit: BoxFit.fitWidth,
                       image: AssetImage(
                         'assets/images/goddess.jpg',

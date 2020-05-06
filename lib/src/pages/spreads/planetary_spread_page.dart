@@ -63,7 +63,7 @@ class _PlanetarySpreadPageState extends State<PlanetarySpreadPage> {
           Image(
             fit: BoxFit.cover,
             color: Colors.pinkAccent,
-            colorBlendMode: BlendMode.color,
+            colorBlendMode: BlendMode.darken,
             image: AssetImage(
               'assets/spreads/spread${widget.index}.jpg',
             ),
@@ -177,12 +177,26 @@ class _PlanetarySpreadPageState extends State<PlanetarySpreadPage> {
                       horizontal: 30.0,
                     ),
                     child: SingleChildScrollView(
-                      child: Text(
-                        S.of(context).spreadPlanetary,
-                        style: GoogleFonts.galada(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                        ),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            S.of(context).titlePlanetarySpread,
+                            style: GoogleFonts.galada(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Text(
+                            S.of(context).spreadPlanetary,
+                            style: GoogleFonts.galada(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

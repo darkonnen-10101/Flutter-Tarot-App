@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
@@ -8,6 +9,9 @@ import 'package:tarotcardapp/src/pages/tutorial_cards_page.dart';
 import 'package:tarotcardapp/src/providers/all_deck.dart';
 import 'package:tarotcardapp/src/routes/spread_routes.dart';
 import 'single_tarot_spread_page.dart';
+
+import 'package:flutter_parallax/flutter_parallax.dart';
+import 'package:share/share.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -30,32 +34,27 @@ class HomePage extends StatelessWidget {
         child: Container(
           child: Column(
             children: <Widget>[
-              SafeArea(
-                child: DrawerHeader(
-                  padding: EdgeInsets.all(
-                    0.0,
-                  ),
-                  child: Container(
-                    color: Colors.green,
-                  ),
+              Container(
+                child: Image(
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/oracle.jpg'),
                 ),
               ),
               ListTile(
-                title: Text('Item 1'),
+                enabled: true,
+                title: Text(
+                  S.of(context).optionHome,
+                  style: GoogleFonts.galada(color: Colors.pinkAccent),
+                ),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pop();
                 },
               ),
               ListTile(
                 title: Text(
                   S.of(context).useAllCards,
+                  style: GoogleFonts.galada(color: Colors.pinkAccent),
                 ),
                 trailing: Switch.adaptive(
                   value: _allDeckChoice.allDeck,
@@ -68,6 +67,7 @@ class HomePage extends StatelessWidget {
               ListTile(
                 title: Text(
                   S.of(context).onlyUprightReading,
+                  style: GoogleFonts.galada(color: Colors.pinkAccent),
                 ),
                 trailing: Switch.adaptive(
                   value: _allDeckChoice.onlyUpright,
@@ -77,6 +77,25 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
+              ListTile(
+                title: Text(
+                  S.of(context).optionShare,
+                  style: GoogleFonts.galada(color: Colors.pinkAccent),
+                ),
+                onTap: () {
+                  Share.share(
+                      'Tarot App https://play.google.com/store/apps/details?id=com.mundodiferente.tarotcardapp');
+                },
+              ),
+              ListTile(
+                title: Text(
+                  S.of(context).optionExit,
+                  style: GoogleFonts.galada(color: Colors.pinkAccent),
+                ),
+                onTap: () {
+                  SystemNavigator.pop();
+                },
+              ),
             ],
           ),
         ),
@@ -85,12 +104,14 @@ class HomePage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.only(
-              top: 20.0,
-              bottom: 30.0,
+              top: 30.0,
+              bottom: 60.0,
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 _SingleCardChoice(),
                 SizedBox(
@@ -105,34 +126,35 @@ class HomePage extends StatelessWidget {
                   height: 20.0,
                 ),
                 _TarotTutorial(
-                  image: 'assets/images/oracle.jpg',
+                  image: 'assets/images/arcana.jpg',
                   title: S.of(context).tutorialMajor,
                   isMayorArcana: true,
                   startPosition: 0,
                 ),
                 _TarotTutorial(
-                  image: 'assets/images/oracle.jpg',
+                  image: 'assets/images/wands.jpg',
                   title: S.of(context).tutorialMinorWands,
                   isMayorArcana: false,
                   startPosition: 22,
                 ),
                 _TarotTutorial(
-                  image: 'assets/images/oracle.jpg',
-                  title: S.of(context).tutorialMinorPentacles,
+                  image: 'assets/images/swords.jpg',
+                  title: S.of(context).tutorialMinorSwords,
                   isMayorArcana: false,
-                  startPosition: 36,
+                  startPosition: 64,
                 ),
                 _TarotTutorial(
-                  image: 'assets/images/oracle.jpg',
+                  image: 'assets/images/cups.jpg',
                   title: S.of(context).tutorialMinorCups,
                   isMayorArcana: false,
                   startPosition: 50,
                 ),
+
                 _TarotTutorial(
-                  image: 'assets/images/oracle.jpg',
-                  title: S.of(context).tutorialMinorSwords,
+                  image: 'assets/images/pentacles.jpg',
+                  title: S.of(context).tutorialMinorPentacles,
                   isMayorArcana: false,
-                  startPosition: 64,
+                  startPosition: 36,
                 ),
               ],
             ),
@@ -167,6 +189,7 @@ class _TarotTutorial extends StatelessWidget {
               isMayorArcana: this.isMayorArcana,
               startPosition: this.startPosition,
               title: this.title,
+              image: this.image,
             ),
           ),
           SizedBox(
@@ -203,33 +226,32 @@ class _TarotTutorialSlivers extends StatelessWidget {
           children: <Widget>[
             Hero(
               tag: this.title,
-              child: Opacity(
-                opacity: 0.9,
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF9c0c74),
-                    boxShadow: [
-                      BoxShadow(blurRadius: 3, color: Color(0x44000000))
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        24.0,
-                      ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    25.0,
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      24.0,
                     ),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        24.0,
-                      ),
-                    ),
+                  child: Parallax.inside(
+                    mainAxisExtent: 200.0,
                     child: Image(
                       fit: BoxFit.cover,
                       color: Colors.pink,
                       colorBlendMode: BlendMode.darken,
-                      height: 100.0,
                       image: AssetImage(
                         this.image,
                       ),
@@ -266,14 +288,14 @@ class SpreadSwiper extends StatelessWidget {
       S.of(context).titleAstrologicalSpread,
       S.of(context).titleBirthdaySpread,
       S.of(context).titleCelticCrossSpread,
-      S.of(context).titleCrossAndTriangle,
+      S.of(context).titleCrossAndTriangleSpread,
       S.of(context).titleDreamExplorationSpread,
       S.of(context).titleMandalaSpread,
       S.of(context).titlePastLifeSpread,
       S.of(context).titlePlanetarySpread,
       S.of(context).titleRelationshipSpread,
       S.of(context).titleStarGuideSpread,
-      S.of(context).titleTetraktys,
+      S.of(context).titleTetraktysSpread,
       S.of(context).titleThreeCardsSpread,
       S.of(context).titleTreeOfLifeSpread,
       S.of(context).titleTrueLoveSpread,
@@ -353,36 +375,43 @@ class _SingleCardChoice extends StatelessWidget {
           Center(
             child: Hero(
               tag: 'tarot_spread',
-              child: Opacity(
-                opacity: 0.9,
-                child: Container(
-                  height: 300.0,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF9c0c74),
-                    boxShadow: [
-                      BoxShadow(blurRadius: 3, color: Color(0x44000000))
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        24.0,
-                      ),
+              child: Container(
+                height: 300.0,
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    25.0,
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      24.0,
                     ),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        24.0,
-                      ),
-                    ),
-                    child: Image(
-                      fit: BoxFit.cover,
-                      color: Colors.pink,
-                      colorBlendMode: BlendMode.darken,
-                      height: 100.0,
-                      image: AssetImage(
-                        'assets/images/oracle.jpg',
-                      ),
+//                    child: Image(
+//                      fit: BoxFit.cover,
+//                      color: Colors.pink,
+//                      colorBlendMode: BlendMode.darken,
+//                      height: 100.0,
+//                      image: AssetImage(
+//                        'assets/images/goddess.jpg',
+//                      ),
+//                    ),
+                  child: Image(
+                    fit: BoxFit.cover,
+                    color: Colors.pinkAccent,
+                    colorBlendMode: BlendMode.darken,
+                    image: AssetImage(
+                      'assets/images/goddess.jpg',
                     ),
                   ),
                 ),

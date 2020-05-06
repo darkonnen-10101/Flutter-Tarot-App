@@ -27,6 +27,33 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  String get optionHome {
+    return Intl.message(
+      'Home',
+      name: 'optionHome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get optionShare {
+    return Intl.message(
+      'Share this app',
+      name: 'optionShare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get optionExit {
+    return Intl.message(
+      'Exit',
+      name: 'optionExit',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get dailyReading {
     return Intl.message(
       'Daily Reading',
@@ -99,19 +126,28 @@ class S {
     );
   }
 
-  String get titleTetraktys {
+  String get instructionsClick {
     return Intl.message(
-      'Tetraktys Spread',
-      name: 'titleTetraktys',
+      'Tap to pick a card',
+      name: 'instructionsClick',
       desc: '',
       args: [],
     );
   }
 
-  String get titleCrossAndTriangle {
+  String get titleTetraktysSpread {
+    return Intl.message(
+      'Tetraktys Spread',
+      name: 'titleTetraktysSpread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get titleCrossAndTriangleSpread {
     return Intl.message(
       'Cross and Triangle Spread',
-      name: 'titleCrossAndTriangle',
+      name: 'titleCrossAndTriangleSpread',
       desc: '',
       args: [],
     );
@@ -227,7 +263,7 @@ class S {
 
   String get spreadTetraktys {
     return Intl.message(
-      '',
+      'The Tetraktys spread is based upon Platonist thought and Pythagorean mathematics. The 10-card spread gives a snapshot of your overall state and explores everything from the most basic physical elements to the spiritual self. The various cards in this spread represent the following about you:\n\n1. Fire (creative force, will and ambition)\n2. Air (current strategies and thoughts concerning goals)\n3. Water (explores emotional self)\n4. Earth (coping every day life)\n5. Creator (explores what drives you in new directions)\n6. Sustainer (what helps you to maintain a balanced and healthy life)\n7. Destroyer (what needs to be jettisoned in order to move forward)\n8. Light (cosmic forces guiding you toward fulfillment)\n9. Dark (cosmos reaction to your state of being)\n10. Premise (foundation for the entire spread)',
       name: 'spreadTetraktys',
       desc: '',
       args: [],
@@ -236,7 +272,7 @@ class S {
 
   String get spreadCrossAndTriangle {
     return Intl.message(
-      '',
+      'This is a query spread used to explore questions concerning the overall direction of your life. The various cards in this spread represent the following about you:\n\n1. Life Force\n2. Thoughts\n3. Emotions\n4. Spirit\n5. Physical Self\n6. Opposing Forces\n7. Other Opposing Forces\n8. Necessary energies to call upon\n9. Question outcome',
       name: 'spreadCrossAndTriangle',
       desc: '',
       args: [],
@@ -245,7 +281,7 @@ class S {
 
   String get spreadCelticCross {
     return Intl.message(
-      '',
+      'The Celtic Cross spread is probably the most popular spread in use today. It is intended to shed light on many aspects of your life. Due to its popularity over the years, there have been many variations to the layout of the cards in this spread. However, whichever one is used, you just really need to concentrate on the question you put to the cards. The various cards in this spread represent the following about you:\n \n1. The Significator represents you (the querent) and your current state of being.\n2. The Crossing denotes that which opposes or influences you.\n3. The Foundation addresses the origin of your question.\n4. The Recent Past represents past events and concerns.\n5. The Crown addresses issues that are significant in the present or may come to pass in the future. This card foretells future events which you may or may not occur, depending upon how you respond to the present situation.\n6. The Future depicts that which lies ahead.\n7. Emotions signifies the current state of your emotional self.\n8. External Forces represents the influence of others in your life as well as trends in your relationships with others.\n9. Hopes and Desires stands for the hopes and desires you have for the outcome of your question.\n10. The Outcome is the ultimate outcome your question. Remember, the future is not predetermined. Interpret this card in the context of the entire reading and as an indicator of the path you are currently on, but not bound to the reading.',
       name: 'spreadCelticCross',
       desc: '',
       args: [],
@@ -254,7 +290,7 @@ class S {
 
   String get spreadAstrological {
     return Intl.message(
-      'This is the i18n for the Astrological Spread',
+      'In this spread, each card is read as its own entity. Individual cards represent each astrological house and should be interpreted with the strengths and weaknesses of the corresponding house in mind. You need not ask a question before using this spread. The various cards in this spread represent the following about you:\n\n1. Self\n2. Aries (current mood)\n3. Taurus (finances)\n 4. Gemini (travel and communication)\n5. Cancer (home, parents, children and extended family)\n6. Leo (pleasure)\n7. Virgo (health)\n8. Libra (partnerships and marriage)\n9. Scorpio (death and inheritance)\n10. Sagittarius (spirituality, education and dreams)\n11. Capricorn (career)\n12. Aquarius (friendship)\n13. Pisces (burden, opposition and fears)',
       name: 'spreadAstrological',
       desc: '',
       args: [],
@@ -263,7 +299,7 @@ class S {
 
   String get spreadRelationship {
     return Intl.message(
-      '',
+      'This spread is used to explore your relationships with others by exploring the needs and views of both parties. Think of your relationship with a specific person and ask your question. The various cards in this spread represent the following about you:\n\n1. How you view your partner\n2. How your partner views you\n3. Your needs\n4. Your partner\'s needs\n5. Current state of relationship\n6. The path you would like your relationship to follow\n7. The path your partner would like to see your relationship follow\n8. Aspects of your relationship to consider\n9. Question outcome',
       name: 'spreadRelationship',
       desc: '',
       args: [],
@@ -272,7 +308,7 @@ class S {
 
   String get spreadPlanetary {
     return Intl.message(
-      '',
+      'This is a query spread that may yield insight into a number of different aspects of your life’s current state. Concentrate on your specific question. The various cards in this spread represent the following about you:\n\n1. Self\n2. Moon (home)\n3. Mercury (business, skills and integrity)\n4. Venus (love)\n5. Mars (hostility, opposition and aggression)\n6. Jupiter (finance, acquisition and wealth)\n7. Saturn (intellect)\n8. Question outcome',
       name: 'spreadPlanetary',
       desc: '',
       args: [],
@@ -281,7 +317,7 @@ class S {
 
   String get spreadBirthday {
     return Intl.message(
-      '',
+      'The birthday spread is used to help you plot a course toward achieving specific goals before your next birthday. It also tells you where you are right now and how to evaluate what happened previously. Focus on what you would like to accomplish before then and find out what the next year might bring. The various cards in this spread represent the following about you:\n\n1. Current place in the world\n2. Goals for the next year\n3. What empowers you\n4. Powers within that you need to develop\n5. Present physical and material well-being\n6. Present emotional state\n7. Present spiritual state\n8. Oppositions\n9. Actions required to achieve goals',
       name: 'spreadBirthday',
       desc: '',
       args: [],
@@ -290,7 +326,7 @@ class S {
 
   String get spreadMandala {
     return Intl.message(
-      '',
+      'This spread is used to explore your spiritual side. You may pose a question to the cards using this spread, or may explore your overall spiritual self without making a specific inquiry. The various cards in this spread represent the following about you:\n\n1. Self\n2. Ambitions, desires and primal urges\n3. Ideals, goals and path to spiritual contentment\n4. Real accomplishments and life path\n5. Dependencies, addictions and erroneous values\n6. Strengths and positive personality traits\n7. Faults and weaknesses\n8. Self-awareness and self-image\n9. Desires and higher purpose',
       name: 'spreadMandala',
       desc: '',
       args: [],
@@ -299,7 +335,7 @@ class S {
 
   String get spreadStarGuide {
     return Intl.message(
-      '',
+      'This spread is often used to explore a very specific question. The various cards in this spread represent the following about you:\n\n1. Present situation\n2. Causes of conflicts and obstacles\n3. Changes needed in order to face challenges\n4. Strengths\n5. Other challenges\n6. Final outcome',
       name: 'spreadStarGuide',
       desc: '',
       args: [],
@@ -308,7 +344,7 @@ class S {
 
   String get spreadTreeOfLife {
     return Intl.message(
-      '',
+      'The Tree of Life spread is a very thorough method of exploring and analyzing your mind, body and spirit, as well as life path and your psychic self and psychic abilities. The various cards in this spread represent the following about you:\n\n1. Highest ideals\n2. Creative power\n3. Wisdom\n4. Virtues\n5. Force of your being\n6. Health, beauty and altruism\n7. Lovers, Lusts, Artistic self and Instincts\n8. You as a procreator, designer and scientist\n9. Imagination and psychic self\n10. Physical self',
       name: 'spreadTreeOfLife',
       desc: '',
       args: [],
@@ -317,7 +353,7 @@ class S {
 
   String get spreadPastLife {
     return Intl.message(
-      '',
+      'This spread is used to explore how your past lives have affected your current life. It can be used as a general overview for all of your past lives, or to give more specific details about one of them. The various cards in this spread represent the following about you:\n\n1. Emotional Influences\n2. Mental influences\n3. Spiritual influences\n4. Physical influences\n5. Karmic debt owed\n6. Karmic lessons to learn\n7. Past life impact on present life\n8. Past life impact on future',
       name: 'spreadPastLife',
       desc: '',
       args: [],
@@ -326,7 +362,7 @@ class S {
 
   String get spreadDreamExploration {
     return Intl.message(
-      '',
+      'This spread is often used to explore a recent or recurring dream. The various cards in this spread represent the following about you:\n \n1. Relevance of the dream to your life\n2. Lessons to be learned from dreams\n3. How to apply dreams to your life',
       name: 'spreadDreamExploration',
       desc: '',
       args: [],
@@ -335,7 +371,7 @@ class S {
 
   String get spreadTrueLove {
     return Intl.message(
-      '',
+      'It should come as no surprise that this is one of the tarot spreads on this list. Everyone likes to know where their love life is heading on in the following month. This tarot spread is great for those times that you want to find out what’s going to happen in your romantic relationship, whether you are in a good relationship that will stand the test of time and if you’ll live happily ever after, or as close to it as possible. Every relationship has its ups and downs and with this six-card tarot spreads you will be able to evaluate and share your physical, emotional, mental and spiritual connections with your partner.\n\n1. The first card represents you. It signifies what you currently feel about your relationship, your approach, and your outlook.\n2. The second card represents your partner. It also represents his current emotions towards you, his attitude, and his expectations about your relationship.\n3. The third card is a connection card. What are the characteristics that you have in common and how do they bind you together?\n4. The fourth card indicates the strength of your relationship. What are the qualities that make your relationship flourish?\n5. The fifth card shows the weaknesses in your relationship. What are the things you both need to improve?\n6. This final card is your true love card. It interprets what needs to be addressed. ',
       name: 'spreadTrueLove',
       desc: '',
       args: [],
@@ -344,7 +380,7 @@ class S {
 
   String get spreadThreeCards {
     return Intl.message(
-      '',
+      'The simplest of all. Three cards and that’s it. No sweat. And that’s what makes this one of the most popular online Tarot readers.\n\nBut don’t let its simplicity deceive you, for this is one of the most powerful tarot card spreads, and a personal favorite of mine. This spread is the quickest way to get answers to any questions you may have in your life, and it can even provide you with insight and guidance if you are simply feel lost and confused.\n\nIt is by far one of the most dynamic spreads, and is incredibly effective at highlighting the energy of your past, present and future, and not only in a month.\n\n1. Past\n2. Present\n3. Future',
       name: 'spreadThreeCards',
       desc: '',
       args: [],

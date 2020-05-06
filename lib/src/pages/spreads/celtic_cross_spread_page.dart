@@ -63,7 +63,7 @@ class _CelticCrossSpreadPageState extends State<CelticCrossSpreadPage> {
           Image(
             fit: BoxFit.cover,
             color: Colors.pinkAccent,
-            colorBlendMode: BlendMode.color,
+            colorBlendMode: BlendMode.darken,
             image: AssetImage(
               'assets/spreads/spread${widget.index}.jpg',
             ),
@@ -81,69 +81,81 @@ class _CelticCrossSpreadPageState extends State<CelticCrossSpreadPage> {
                   children: <Widget>[
                     SingleChildScrollView(
                       controller: _controller,
+                      padding: EdgeInsets.only(
+                        top: 40.0,
+                        bottom: 150.0,
+                      ),
                       physics: BouncingScrollPhysics(),
-                      child: Column(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          DragTargetSpread(
-                            numberOrder: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Column(
                             children: <Widget>[
+                              SizedBox(
+                                height: 195.0,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 6,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 65.0,
+                              ),
                               DragTargetSpread(
                                 numberOrder: 3,
                               ),
-                              SizedBox(
-                                width: 20.0,
-                              ),
-                              Column(
+                              Stack(
+                                alignment: Alignment.bottomCenter,
                                 children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      DragTargetSpread(
-                                        numberOrder: 4,
-                                      ),
-                                      SizedBox(
-                                        width: 30.0,
-                                      ),
-                                      DragTargetSpread(
-                                        numberOrder: 6,
-                                      ),
-                                    ],
+                                  DragTargetSpread(
+                                    numberOrder: 1,
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      DragTargetSpread(
-                                        numberOrder: 2,
-                                      ),
-                                      SizedBox(
-                                        width: 30.0,
-                                      ),
-                                      DragTargetSpread(
-                                        numberOrder: 8,
-                                      ),
-                                    ],
+                                  RotatedBox(
+                                    quarterTurns: 1,
+                                    child: DragTargetSpread(
+                                      numberOrder: 2,
+                                    ),
                                   ),
                                 ],
                               ),
                               SizedBox(
-                                width: 20.0,
+                                height: 10.0,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 4,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 195.0,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 5,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              DragTargetSpread(
+                                numberOrder: 10,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 9,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 8,
                               ),
                               DragTargetSpread(
                                 numberOrder: 7,
                               ),
                             ],
-                          ),
-                          DragTargetSpread(
-                            numberOrder: 1,
-                          ),
-                          SizedBox(
-                            height: 200.0,
                           ),
                         ],
                       ),
@@ -177,12 +189,26 @@ class _CelticCrossSpreadPageState extends State<CelticCrossSpreadPage> {
                       horizontal: 30.0,
                     ),
                     child: SingleChildScrollView(
-                      child: Text(
-                        S.of(context).spreadCelticCross,
-                        style: GoogleFonts.galada(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                        ),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            S.of(context).titleCelticCrossSpread,
+                            style: GoogleFonts.galada(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Text(
+                            S.of(context).spreadCelticCross,
+                            style: GoogleFonts.galada(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

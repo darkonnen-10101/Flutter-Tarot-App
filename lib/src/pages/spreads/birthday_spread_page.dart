@@ -63,7 +63,7 @@ class _BirthdaySpreadPageState extends State<BirthdaySpreadPage> {
           Image(
             fit: BoxFit.cover,
             color: Colors.pinkAccent,
-            colorBlendMode: BlendMode.color,
+            colorBlendMode: BlendMode.darken,
             image: AssetImage(
               'assets/spreads/spread${widget.index}.jpg',
             ),
@@ -81,69 +81,56 @@ class _BirthdaySpreadPageState extends State<BirthdaySpreadPage> {
                   children: <Widget>[
                     SingleChildScrollView(
                       controller: _controller,
+                      padding: EdgeInsets.only(
+                        top: 40.0,
+                        bottom: 150.0,
+                      ),
                       physics: BouncingScrollPhysics(),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          DragTargetSpread(
-                            numberOrder: 5,
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
+                              DragTargetSpread(
+                                numberOrder: 1,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 2,
+                              ),
                               DragTargetSpread(
                                 numberOrder: 3,
                               ),
-                              SizedBox(
-                                width: 20.0,
+                              DragTargetSpread(
+                                numberOrder: 4,
                               ),
-                              Column(
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      DragTargetSpread(
-                                        numberOrder: 4,
-                                      ),
-                                      SizedBox(
-                                        width: 30.0,
-                                      ),
-                                      DragTargetSpread(
-                                        numberOrder: 6,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      DragTargetSpread(
-                                        numberOrder: 2,
-                                      ),
-                                      SizedBox(
-                                        width: 30.0,
-                                      ),
-                                      DragTargetSpread(
-                                        numberOrder: 8,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              DragTargetSpread(
+                                numberOrder: 5,
                               ),
-                              SizedBox(
-                                width: 20.0,
+                              DragTargetSpread(
+                                numberOrder: 6,
                               ),
                               DragTargetSpread(
                                 numberOrder: 7,
                               ),
                             ],
                           ),
-                          DragTargetSpread(
-                            numberOrder: 1,
-                          ),
-                          SizedBox(
-                            height: 200.0,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              DragTargetSpread(
+                                numberOrder: 8,
+                              ),
+                              DragTargetSpread(
+                                numberOrder: 9,
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -177,12 +164,26 @@ class _BirthdaySpreadPageState extends State<BirthdaySpreadPage> {
                       horizontal: 30.0,
                     ),
                     child: SingleChildScrollView(
-                      child: Text(
-                        S.of(context).spreadBirthday,
-                        style: GoogleFonts.galada(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                        ),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            S.of(context).titleBirthdaySpread,
+                            style: GoogleFonts.galada(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Text(
+                            S.of(context).spreadBirthday,
+                            style: GoogleFonts.galada(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
