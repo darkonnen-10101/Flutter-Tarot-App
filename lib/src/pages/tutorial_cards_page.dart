@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_parallax/flutter_parallax.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
 import 'package:tarotcardapp/src/pages/single_card_detail_page.dart';
