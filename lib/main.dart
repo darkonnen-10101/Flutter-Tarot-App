@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tarotcardapp/src/providers/all_deck.dart';
+import 'package:tarotcardapp/src/providers/interstitial_counter.dart';
 
 import 'src/pages/home_page.dart';
 import 'src/providers/current_index.dart';
@@ -26,6 +27,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => AllDeck(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => InterstitialCounter(),
         ),
       ],
       child: MyApp(),

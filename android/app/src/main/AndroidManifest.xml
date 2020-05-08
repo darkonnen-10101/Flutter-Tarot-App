@@ -8,6 +8,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="Tarot"
+        android:extractNativeLibs="false"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
@@ -26,5 +27,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5110921575057322~3782162606" />
+        <!--            android:value="ca-app-pub-3940256099942544~3347511713" />-->
+
     </application>
 </manifest>

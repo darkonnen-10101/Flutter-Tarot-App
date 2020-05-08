@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tarotcardapp/src/providers/all_deck.dart';
 import 'package:tarotcardapp/src/providers/current_index.dart';
+import 'package:tarotcardapp/src/providers/interstitial_counter.dart';
 
 class TarotDeck extends StatefulWidget {
   @override
@@ -70,6 +71,8 @@ class _TarotDeckState extends State<TarotDeck>
   @override
   Widget build(BuildContext context) {
     final currentIndex = Provider.of<CurrentIndexProvider>(context);
+    final _interstitialCounter = Provider.of<InterstitialCounter>(context);
+
     int myData = 0;
     animationController.forward();
 
@@ -108,6 +111,7 @@ class _TarotDeckState extends State<TarotDeck>
                   setState(() {});
                 },
                 onDragCompleted: () {
+                  _interstitialCounter.counter += 1;
                   setState(() {
 //                  currentIndex.currentIndex = getRand();
                     myData = randomChoice;

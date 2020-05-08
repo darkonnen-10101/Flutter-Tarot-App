@@ -1,10 +1,14 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
+import 'package:tarotcardapp/src/admob/admob_config.dart';
+import 'package:tarotcardapp/src/widgets/admob_banner_wrapper.dart';
 
 class SingleCardDetailPage extends StatefulWidget {
   final int index;
+  static AdmobBannerSize bannerSize = AdmobBannerSize.FULL_BANNER;
 
   SingleCardDetailPage({this.index});
 
@@ -17,6 +21,11 @@ class _SingleCardDetailPageState extends State<SingleCardDetailPage>
   AnimationController controller;
 
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+
+  final AdmobBannerWrapper fixedAdmobBanner = AdmobBannerWrapper(
+    adSize: SingleCardDetailPage.bannerSize,
+    adUnitId: getBannerAdUnitId(),
+  );
 
   @override
   void initState() {
@@ -224,112 +233,127 @@ class _SingleCardDetailPageState extends State<SingleCardDetailPage>
           ),
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            //color: Colors.red,
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 50.0,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Hero(
-                    tag: 'single_card_detail',
-                    child: FlipCard(
-                      direction: FlipDirection.HORIZONTAL,
-                      flipOnTouch: false,
-                      key: cardKey,
-                      front: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFF9c0c74),
-                          boxShadow: [
-                            BoxShadow(blurRadius: 3, color: Color(0x44000000))
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: RotatedBox(
-                            quarterTurns: 2,
-                            child: Image(
-                              fit: BoxFit.cover,
-                              width: 200.0,
-                              image: AssetImage(
-                                //'assets/images/back.jpeg',
-                                'assets/images/tarotback.png',
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      back: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(
-                                3.0,
-                                3.0,
-                              ),
-                              blurRadius: 16.0,
-                              spreadRadius: 4.0,
-                            ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: Image(
-                            fit: BoxFit.cover,
-                            width: 200.0,
-                            image: AssetImage(
-                              //'assets/images/back.jpeg',
-                              'assets/images/${widget.index}.jpg',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Container(
+                //color: Colors.red,
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 50.0,
                   ),
-                  Container(
-                    padding: EdgeInsets.all(
-                      20.0,
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
+                  child: Column(
+                    children: <Widget>[
+                      Hero(
+                        tag: 'single_card_detail',
+                        child: FlipCard(
+                          direction: FlipDirection.HORIZONTAL,
+                          flipOnTouch: false,
+                          key: cardKey,
+                          front: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFF9c0c74),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 3, color: Color(0x44000000))
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              child: RotatedBox(
+                                quarterTurns: 2,
+                                child: Image(
+                                  fit: BoxFit.cover,
+                                  width: 200.0,
+                                  image: AssetImage(
+                                    //'assets/images/back.jpeg',
+                                    'assets/images/tarotback.png',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          back: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: Offset(
+                                    3.0,
+                                    3.0,
+                                  ),
+                                  blurRadius: 16.0,
+                                  spreadRadius: 4.0,
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              child: Image(
+                                fit: BoxFit.cover,
+                                width: 200.0,
+                                image: AssetImage(
+                                  //'assets/images/back.jpeg',
+                                  'assets/images/${widget.index}.jpg',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      color: Colors.pinkAccent,
-                      elevation: 10.0,
-                      child: Padding(
+                      Container(
                         padding: EdgeInsets.all(
-                          30.0,
+                          20.0,
                         ),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              '${titleCards[widget.index]}',
-                              style: GoogleFonts.galada(
-                                color: Colors.white,
-                                fontSize: 30.0,
-                              ),
+                        width: MediaQuery.of(context).size.width,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          color: Colors.pinkAccent,
+                          elevation: 10.0,
+                          child: Padding(
+                            padding: EdgeInsets.all(
+                              30.0,
                             ),
-                            Text(
-                              '${content[widget.index]}',
-                              style: GoogleFonts.galada(
-                                color: Colors.white,
-                              ),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  '${titleCards[widget.index]}',
+                                  style: GoogleFonts.galada(
+                                    color: Colors.white,
+                                    fontSize: 30.0,
+                                  ),
+                                ),
+                                Text(
+                                  '${content[widget.index]}',
+                                  style: GoogleFonts.galada(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
+            Positioned.fill(
+              bottom: 0,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: fixedAdmobBanner,
+              ),
+            ),
+          ],
         ),
       ),
     );

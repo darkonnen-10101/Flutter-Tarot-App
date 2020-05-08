@@ -1,22 +1,84 @@
 import 'dart:ui';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tarotcardapp/generated/l10n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:tarotcardapp/src/admob/admob_config.dart';
 import 'package:tarotcardapp/src/pages/tutorial_cards_page.dart';
 import 'package:tarotcardapp/src/providers/all_deck.dart';
+import 'package:tarotcardapp/src/providers/interstitial_counter.dart';
 import 'package:tarotcardapp/src/routes/spread_routes.dart';
+import 'package:tarotcardapp/src/widgets/admob_banner_wrapper.dart';
+import 'package:tarotcardapp/src/widgets/privacy_policy.dart';
 import 'single_tarot_spread_page.dart';
 
 import 'package:flutter_parallax/flutter_parallax.dart';
 import 'package:share/share.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  static AdmobBannerSize bannerSize = AdmobBannerSize.FULL_BANNER;
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final AdmobBannerWrapper fixedAdmobBanner = AdmobBannerWrapper(
+    adSize: HomePage.bannerSize,
+    adUnitId: getBannerAdUnitId(),
+  );
+
+  AdmobInterstitial interstitialAd;
+
+  @override
+  void initState() {
+    interstitialAd = AdmobInterstitial(
+      adUnitId: getInterstitialAdUnitId(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+      },
+    );
+
+    interstitialAd.load();
+
+    super.initState();
+    // Add code after super
+  }
+
+  @override
+  void dispose() {
+    interstitialAd.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _allDeckChoice = Provider.of<AllDeck>(context);
+    final _interstitialCounter = Provider.of<InterstitialCounter>(context);
+
+    Future<bool> getInterstitial() async {
+      bool myBool = await interstitialAd.isLoaded;
+      if (myBool && _interstitialCounter.counter >= 10) {
+        Future.delayed(const Duration(milliseconds: 2500), () {
+          interstitialAd.show();
+        });
+        _interstitialCounter.counter = 0;
+      }
+      return myBool;
+    }
+
+    getInterstitial();
+
+    Future<void> _displayDialog(BuildContext context) async {
+      return showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return PrivacyPolicy();
+          });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -89,6 +151,16 @@ class HomePage extends StatelessWidget {
               ),
               ListTile(
                 title: Text(
+                  S.of(context).privacyPolicy,
+                  style: GoogleFonts.galada(color: Colors.pinkAccent),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  _displayDialog(context);
+                },
+              ),
+              ListTile(
+                title: Text(
                   S.of(context).optionExit,
                   style: GoogleFonts.galada(color: Colors.pinkAccent),
                 ),
@@ -100,66 +172,77 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 30.0,
-              bottom: 60.0,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                _SingleCardChoice(),
-                SizedBox(
-                  height: 10.0,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 30.0,
+                  bottom: 60.0,
                 ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    _SingleCardChoice(),
+                    SizedBox(
+                      height: 10.0,
+                    ),
 //                _TarotCardsDescription(),
-                SizedBox(
-                  height: 10.0,
-                ),
-                SpreadSwiper(),
-                SizedBox(
-                  height: 20.0,
-                ),
-                _TarotTutorial(
-                  image: 'assets/images/arcana.jpg',
-                  title: S.of(context).tutorialMajor,
-                  isMayorArcana: true,
-                  startPosition: 0,
-                ),
-                _TarotTutorial(
-                  image: 'assets/images/wands.jpg',
-                  title: S.of(context).tutorialMinorWands,
-                  isMayorArcana: false,
-                  startPosition: 22,
-                ),
-                _TarotTutorial(
-                  image: 'assets/images/swords.jpg',
-                  title: S.of(context).tutorialMinorSwords,
-                  isMayorArcana: false,
-                  startPosition: 64,
-                ),
-                _TarotTutorial(
-                  image: 'assets/images/cups.jpg',
-                  title: S.of(context).tutorialMinorCups,
-                  isMayorArcana: false,
-                  startPosition: 50,
-                ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    SpreadSwiper(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    _TarotTutorial(
+                      image: 'assets/images/arcana.jpg',
+                      title: S.of(context).tutorialMajor,
+                      isMayorArcana: true,
+                      startPosition: 0,
+                    ),
+                    _TarotTutorial(
+                      image: 'assets/images/wands.jpg',
+                      title: S.of(context).tutorialMinorWands,
+                      isMayorArcana: false,
+                      startPosition: 22,
+                    ),
+                    _TarotTutorial(
+                      image: 'assets/images/swords.jpg',
+                      title: S.of(context).tutorialMinorSwords,
+                      isMayorArcana: false,
+                      startPosition: 64,
+                    ),
+                    _TarotTutorial(
+                      image: 'assets/images/cups.jpg',
+                      title: S.of(context).tutorialMinorCups,
+                      isMayorArcana: false,
+                      startPosition: 50,
+                    ),
 
-                _TarotTutorial(
-                  image: 'assets/images/pentacles.jpg',
-                  title: S.of(context).tutorialMinorPentacles,
-                  isMayorArcana: false,
-                  startPosition: 36,
+                    _TarotTutorial(
+                      image: 'assets/images/pentacles.jpg',
+                      title: S.of(context).tutorialMinorPentacles,
+                      isMayorArcana: false,
+                      startPosition: 36,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+          Positioned.fill(
+            bottom: 0,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: fixedAdmobBanner,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -211,8 +294,12 @@ class _TarotTutorialSlivers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _interstitialCounter = Provider.of<InterstitialCounter>(context);
+
     return GestureDetector(
       onTap: () {
+        _interstitialCounter.counter += 1;
+
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => this.page,
@@ -249,6 +336,7 @@ class _TarotTutorialSlivers extends StatelessWidget {
                   child: Parallax.inside(
                     mainAxisExtent: 200.0,
                     child: Image(
+                      width: MediaQuery.of(context).size.width,
                       fit: BoxFit.cover,
                       color: Colors.pink,
                       colorBlendMode: BlendMode.darken,
@@ -284,6 +372,8 @@ class SpreadSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _interstitialCounter = Provider.of<InterstitialCounter>(context);
+
     List<String> pagesTitles = [
       S.of(context).titleAstrologicalSpread,
       S.of(context).titleBirthdaySpread,
@@ -347,6 +437,7 @@ class SpreadSwiper extends StatelessWidget {
         itemHeight: 300.0,
         layout: SwiperLayout.STACK,
         onTap: (index) {
+          _interstitialCounter.counter += 1;
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (_) => pages[index],
@@ -362,8 +453,11 @@ class SpreadSwiper extends StatelessWidget {
 class _SingleCardChoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _interstitialCounter = Provider.of<InterstitialCounter>(context);
+
     return GestureDetector(
       onTap: () {
+        _interstitialCounter.counter += 1;
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => SingleTarotSpreadPage(),

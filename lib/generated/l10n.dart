@@ -81,6 +81,15 @@ class S {
     );
   }
 
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get tutorialMajor {
     return Intl.message(
       'Major Arcana',

@@ -1,3 +1,8 @@
+import 'package:admob_flutter/admob_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:tarotcardapp/src/admob/admob_config.dart';
+import 'package:tarotcardapp/src/providers/interstitial_counter.dart';
+
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,14 +25,45 @@ class _CelticCrossSpreadPageState extends State<CelticCrossSpreadPage> {
 
   final _controller = new ScrollController();
 
+  AdmobInterstitial interstitialAd;
+
+  @override
+  void initState() {
+    interstitialAd = AdmobInterstitial(
+      adUnitId: getInterstitialAdUnitId(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+      },
+    );
+
+    interstitialAd.load();
+
+    super.initState();
+    // Add code after super
+  }
+
   @override
   void dispose() {
+    interstitialAd.dispose();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final _interstitialCounter = Provider.of<InterstitialCounter>(context);
+
+    Future<bool> getInterstitial() async {
+      bool myBool = await interstitialAd.isLoaded;
+      if (myBool && _interstitialCounter.counter >= 10) {
+        interstitialAd.show();
+        _interstitialCounter.counter = 0;
+      }
+      return myBool;
+    }
+
+    getInterstitial();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -167,49 +203,42 @@ class _CelticCrossSpreadPageState extends State<CelticCrossSpreadPage> {
                   ],
                 ),
               ),
-              back: Padding(
-                padding: EdgeInsets.all(
-                  20.0,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  padding: EdgeInsets.all(
-                    30.0,
-                  ),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      colorFilter:
-                          ColorFilter.mode(Colors.pink, BlendMode.darken),
-                      image: AssetImage('assets/images/tarotback.png'),
-                    ),
-                  ),
+              back: Container(
+                width: double.infinity,
+                height: double.infinity,
+                child: SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 30.0,
+                    padding: EdgeInsets.all(
+                      30.0,
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            S.of(context).titleCelticCrossSpread,
-                            style: GoogleFonts.galada(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          Text(
-                            S.of(context).spreadCelticCross,
-                            style: GoogleFonts.galada(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                        ],
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        colorFilter:
+                            ColorFilter.mode(Colors.pink, BlendMode.darken),
+                        image: AssetImage('assets/images/tarotback.png'),
                       ),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          S.of(context).titleCelticCrossSpread,
+                          style: GoogleFonts.galada(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text(
+                          S.of(context).spreadCelticCross,
+                          style: GoogleFonts.galada(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

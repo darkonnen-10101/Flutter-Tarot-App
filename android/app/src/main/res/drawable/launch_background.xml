@@ -7,7 +7,9 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:drawable="@android:color/white"
-            android:src="@mipmap/launcher_icon" />
+            android:src="@mipmap/launcher_icon"
+            android:drawable="@android:color/white" />
     </item>
 </layer-list>
+
+<!--    -->

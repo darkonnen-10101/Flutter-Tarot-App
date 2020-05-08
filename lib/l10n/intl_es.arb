@@ -5,6 +5,8 @@
   "dailyReading": "Lectura Diaria",
   "useAllCards" : "Mazo con Arcanos Menores?",
   "onlyUprightReading" : "Sin cartas invertidas?",
+  "privacyPolicy" : "Política de Privacidad",
+
 
   "tutorialMajor": "Arcanos Mayores",
   "tutorialMinorWands" : "Bastos",
